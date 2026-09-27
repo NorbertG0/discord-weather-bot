@@ -203,3 +203,39 @@ class WeatherService:
         buf.seek(0)
 
         return buf, None
+
+    def create_press_chart(self, city, days="1", alerts="no", aqi="no"):
+
+        data, error = self.api.get_data_for_plot(city, days, alerts, aqi)
+
+        if error:
+            return None, error
+
+        forecast = data["forecast"]["forecastday"][0]["hour"]
+
+        time = [x["time"] for x in forecast]
+        pressure = [x["pressure_mb"] for x in forecast]
+
+        data = {"Hour": time, "Pressure": pressure}
+
+        fig = px.line(
+            data,
+            x="Hour",
+            y="Pressure",
+            title="Today's pressure graph (hPa)",
+            color_discrete_sequence=["red"]
+        )
+
+        fig.update_yaxes(
+            range=[
+                min(pressure) - 2,
+                max(pressure) + 2
+            ],
+            title="Pressure (hPa)"
+        )
+
+        buf = io.BytesIO()
+        fig.write_image(buf, format="png")
+        buf.seek(0)
+
+        return buf, None
