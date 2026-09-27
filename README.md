@@ -34,8 +34,6 @@ Discord bot that provides weather information directly through Discord commands.
   <img width="47%" src="https://i.imgur.com/hCqyuj4.png" />
     <img width="45%" alt="image" src="https://github.com/user-attachments/assets/474d49a8-d277-453b-bb0e-515d25434da3" />
   </p>
-
-## 🛠 Installation
   
 ## ✨ Available commands
 ### Weather Commands
@@ -54,6 +52,8 @@ Discord bot that provides weather information directly through Discord commands.
 | `!tempchart <city>` | Generates a temperature forecast graph. |
 | `!windchart <city>` | Generates a wind forecast graph. |
 | `!humchart <city>` | Generates a humidity forecast graph. |
+| `!rainchart <city>` | Generates a rain forecast graph. |
+| `!presschart <city> ` | Generates a atmospheric pressure forecast graph. |
 
 ### Admin Commands
 
