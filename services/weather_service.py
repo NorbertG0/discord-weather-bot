@@ -134,7 +134,8 @@ class WeatherService:
 
         data = {"Hour": time, "Temp": temp}
 
-        fig = px.line(data, x="Hour", y="Temp", title="Today's forecast graph")
+        fig = px.bar(data, x="Hour", y="Temp", title="Today's temperature graph")
+        fig.update_yaxes(title="Temperature (°C)")
         buf = io.BytesIO()
         fig.write_image(buf, format="png")
         buf.seek(0)
@@ -155,7 +156,8 @@ class WeatherService:
 
         data = {"Hour": time, "Wind": wind}
 
-        fig = px.line(data, x="Hour", y="Wind", title="Today's wind graph (km/h)")
+        fig = px.line(data, x="Hour", y="Wind", title="Today's wind graph", color_discrete_sequence=["orange"])
+        fig.update_yaxes(title_text="Wind (km/h)")
         buf = io.BytesIO()
         fig.write_image(buf, format="png")
         buf.seek(0)
@@ -176,7 +178,8 @@ class WeatherService:
 
         data = {"Hour": time, "Humidity": humidity}
 
-        fig = px.bar(data, x="Hour", y="Humidity", title="Today's humidity graph (%)")
+        fig = px.bar(data, x="Hour", y="Humidity", title="Today's humidity graph", color_discrete_sequence=["green"])
+        fig.update_yaxes(title_text="Humidity (%)", range=[0, 100])
         buf = io.BytesIO()
         fig.write_image(buf, format="png")
         buf.seek(0)
@@ -197,7 +200,8 @@ class WeatherService:
 
         data = {"Hour": time, "Rain": rain}
 
-        fig = px.bar(data, x="Hour", y="Rain", title="Today's rain chance graph (%)")
+        fig = px.bar(data, x="Hour", y="Rain", title="Today's rain chance graph")
+        fig.update_yaxes(title_text="Rain (%)", range=[0, 100])
         buf = io.BytesIO()
         fig.write_image(buf, format="png")
         buf.seek(0)
@@ -222,7 +226,7 @@ class WeatherService:
             data,
             x="Hour",
             y="Pressure",
-            title="Today's pressure graph (hPa)",
+            title="Today's pressure graph",
             color_discrete_sequence=["red"]
         )
 
