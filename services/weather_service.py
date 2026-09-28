@@ -33,6 +33,8 @@ class WeatherService:
             "wind_kph": current["wind_kph"],
             "pressure": current["pressure_mb"],
             "humidity": current["humidity"],
+            "precip_mm": current["precip_mm"],
+            "chance_of_rain": current["chance_of_rain"],
 
             "condition": current["condition"]["text"],
             "icon": current["condition"]["icon"],
