@@ -45,6 +45,7 @@ Discord bot that provides weather information directly through Discord commands.
 | `!wind <city>` | Shows the current wind speed. |
 | `!humidity <city>` | Displays the current humidity. |
 | `!pressure <city>` | Shows the current atmospheric pressure. |
+| `!rain <city` | Shows the current rain data. |
 | `!sun <city>` | Shows sun and moon data. |
 | `!aqi <city>` | Shows the current air quality. |
 | `!forecast <city>` | Shows 3 days weather forecast. |
