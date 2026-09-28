@@ -78,8 +78,15 @@ class Weather(commands.Cog):
 
         embed.add_field(
             name=(
-                f'🌡️ {weather["temperature_c"]} ℃    '
-                f'🌡️ {weather["temperature_f"]} °F    '
+                f'🌡️  {weather["temperature_c"]} ({weather["feelslike_c"]}) ℃      '
+                f'🌡️  {weather["temperature_f"]} ({weather["feelslike_f"]}) °F   '
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
                 f'💨 {weather["wind_kph"]} km/h    '
                 f'⏱️ {weather["pressure"]} hPa    '
                 f'💧 {weather["humidity"]} %'

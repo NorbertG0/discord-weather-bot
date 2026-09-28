@@ -28,6 +28,8 @@ class WeatherService:
 
             "temperature_c": current["temp_c"],
             "temperature_f": current["temp_f"],
+            "feelslike_c": current["feelslike_c"],
+            "feelslike_f": current["feelslike_f"],
             "is_day": "Night" if current["is_day"] == 0 else "Day",
 
             "wind_kph": current["wind_kph"],
