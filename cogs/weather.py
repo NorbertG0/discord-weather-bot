@@ -532,6 +532,45 @@ class Weather(commands.Cog):
             city_name
         )
 
+    @commands.command(name="rain")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def rain(self, ctx, *, city_name=None):
+        error_msg = validate_city_name(city_name, "rain")
+
+        if error_msg:
+            logger.warning(
+                "!rain | Validation error | user=%s | city=%s",
+            )
+            await ctx.channel.send(error_msg)
+            return
+
+        weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        logger.info(
+            "!rain | Rain data retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
+        embed = discord.Embed(
+            title=(
+                f'{weather["city"]} '
+                f'({weather["country"]})'
+            ),
+            description=f'💧 ️{weather["precip_mm"]} mm | chance: {weather["chance_of_rain"]} %',
+            color=0x346eeb
+        )
+
+        embed.set_thumbnail(url='https:' + str(weather["icon"]))
+        embed.set_footer(text='last update - ' + str(weather["last_updated"]))
+
+        await ctx.channel.send(embed=embed)
+        logger.info(
+            "!rain | Rain data send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
     @commands.command(name="aqi")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def air_quality(self, ctx, *, city_name=None):
