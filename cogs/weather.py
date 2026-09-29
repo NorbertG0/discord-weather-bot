@@ -385,6 +385,16 @@ class Weather(commands.Cog):
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
 
+        if error:
+            logger.warning(
+                "!temperature | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
         logger.info(
             "!temperature | Temperature data retrieved | user=%s | city=%s",
             ctx.author,
@@ -430,6 +440,16 @@ class Weather(commands.Cog):
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
 
+        if error:
+            logger.warning(
+                "!wind | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
         logger.info(
             "!wind | Wind data retrieved | user=%s | city=%s",
             ctx.author,
@@ -471,6 +491,16 @@ class Weather(commands.Cog):
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        if error:
+            logger.warning(
+                "!humidity | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
 
         logger.info(
             "!humidity | Humidity data retrieved | user=%s | city=%s",
@@ -514,6 +544,16 @@ class Weather(commands.Cog):
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
 
+        if error:
+            logger.warning(
+                "!pressure | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
         logger.info(
             "!pressure | Pressure data retrieved | user=%s | city=%s",
             ctx.author,
@@ -552,6 +592,16 @@ class Weather(commands.Cog):
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        if error:
+            logger.warning(
+                "!rain | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
 
         logger.info(
             "!rain | Rain data retrieved | user=%s | city=%s",
@@ -593,6 +643,16 @@ class Weather(commands.Cog):
             return
 
         weather, error = self.weather_service.get_current_weather(city_name, settings.LANG)
+
+        if error:
+            logger.warning(
+                "!aqi | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
 
         logger.info(
             "!aqi | Air quality data retrieved | user=%s | city=%s",
@@ -674,20 +734,37 @@ class Weather(commands.Cog):
             return
 
         weather1, error1 = self.weather_service.get_current_weather(city1, settings.LANG)
-        weather2, error2 = self.weather_service.get_current_weather(city2, settings.LANG)
 
-        if error1 or error2:
+        if error1:
             logger.warning(
-                "!compare | Weather data error | user=%s | city=%s | error=%s",
+                "!compare | Weather data error (first city) | user=%s | city=%s | error=%s",
                 ctx.author,
                 city_name,
-                error1 or error2
+                error1
             )
             await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
             return
 
         logger.info(
-            "!compare | Weather retrieved | user=%s | city=%s",
+            "!compare | Weather retrieved (first city) | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
+        weather2, error2 = self.weather_service.get_current_weather(city2, settings.LANG)
+
+        if error2:
+            logger.warning(
+                "!compare | Weather data error (second city) | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error2
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
+        logger.info(
+            "!compare | Weather retrieved (second city) | user=%s | city=%s",
             ctx.author,
             city_name
         )
