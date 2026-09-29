@@ -641,6 +641,133 @@ class Weather(commands.Cog):
             city_name
         )
 
+    @commands.command(name="compare")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def compare(self, ctx, *, city_name=None):
+
+        if not city_name or "|" not in city_name:
+            logger.warning(
+                "!compare | City name error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
+            await ctx.send(
+                "⚠️ Usage: `!compare city1 | city2`"
+            )
+            return
+
+        city1, city2 = city_name.split("|")
+
+        city1 = city1.strip()
+        city2 = city2.strip()
+
+        error1 = validate_city_name(city1, "compare")
+        error2 = validate_city_name(city2, "compare")
+
+        if error1 or error2:
+            logger.warning(
+                "!compare | Validation error | user=%s | city=%s",
+                ctx.author,
+                city_name
+            )
+            await ctx.channel.send(error1 or error2)
+            return
+
+        weather1, error1 = self.weather_service.get_current_weather(city1, settings.LANG)
+        weather2, error2 = self.weather_service.get_current_weather(city2, settings.LANG)
+
+        if error1 or error2:
+            logger.warning(
+                "!compare | Weather data error | user=%s | city=%s | error=%s",
+                ctx.author,
+                city_name,
+                error1 or error2
+            )
+            await ctx.send("⚠️ Unable to retrieve weather data right now. Please try again later.")
+            return
+
+        logger.info(
+            "!compare | Weather retrieved | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
+        embed = discord.Embed(
+            title="Weather comparison",
+            color=0x346eeb
+        )
+
+        embed.add_field(
+            name=(
+                f'{weather1["city"]} '
+                f'({weather1["country"]})   |   '
+                f'{weather2["city"]}  '
+                f'({weather2["country"]})'
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'🌡️  {weather1["temperature_c"]} '
+                f'({weather1["feelslike_c"]}) ℃      '
+                f'    🌡️  {weather2["temperature_c"]} '
+                f'({weather2["feelslike_c"]}) ℃'
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'🌡️  {weather1["temperature_f"]} '
+                f'({weather1["feelslike_f"]}) °F      '
+                f'   🌡️  {weather2["temperature_f"]} '
+                f'({weather2["feelslike_f"]}) °F'
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'💨  {weather1["wind_kph"]} km/h        '
+                f'        💨  {weather2["wind_kph"]} km/h'
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'⏱️  {weather1["pressure"]} hPa        '
+                f'     ⏱️  {weather2["pressure"]} hPa'
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(
+            name=(
+                f'💧  {weather1["humidity"]} %            '
+                f'              💧  {weather2["humidity"]} %'
+            ),
+            value="",
+            inline=False
+        )
+
+        embed.add_field(name=" ", value="", inline=False)
+        embed.set_footer(text=f'last update - {weather1["last_updated"]}')
+
+        await ctx.send(embed=embed)
+
+        logger.info(
+            "!compare | Comparison send | user=%s | city=%s",
+            ctx.author,
+            city_name
+        )
+
 
 async def setup(bot):
     await bot.add_cog(Weather(bot))
