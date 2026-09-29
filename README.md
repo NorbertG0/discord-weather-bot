@@ -1,8 +1,7 @@
 # ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
 
-## 🚀 About
 <p align="justify">
-Discord bot that provides weather information directly through Discord commands. The bot uses WeatherAPI.com to retrieve up-to-date weather data and presents it in a clear, easy-to-read format using Discord embeds.
+Discord bot that provides weather information directly through Discord commands. The bot uses [WeatherAPI.com](https://www.weatherapi.com) to retrieve up-to-date weather data and presents it in a clear, easy-to-read format using Discord embeds.
 </p>
 
 ## ⚙ Features
@@ -55,6 +54,7 @@ Discord bot that provides weather information directly through Discord commands.
 | `!humchart <city>` | Generates a humidity forecast graph. |
 | `!rainchart <city>` | Generates a rain forecast graph. |
 | `!presschart <city> ` | Generates a atmospheric pressure forecast graph. |
+| `!compare <city1> \| <city2>` | Shows weather data of both cities. |
 
 ### Admin Commands
 
