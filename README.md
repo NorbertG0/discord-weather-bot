@@ -1,15 +1,13 @@
 # ![discord](https://i.imgur.com/hvGaBRD.png) Discord Weather Bot
 
-<p align="justify">
 Discord bot that provides weather information directly through Discord commands. The bot uses [WeatherAPI.com](https://www.weatherapi.com) to retrieve up-to-date weather data and presents it in a clear, easy-to-read format using Discord embeds.
-</p>
 
-## ⚙ Features
+## Features
 
 * **Current Weather**: Displays current weather details (temperature, humidity, wind speed, pressure and quality of air informations).
   <p align="center">
-    <img width="49%" alt="image" src="https://github.com/user-attachments/assets/e9482833-32df-490c-aa50-0bbf2abeb923" />
-    <img width="49%" alt="image" src="https://github.com/user-attachments/assets/630f6602-bc89-4cc4-a679-2e3f2e9fc6e9" />
+    <img width="52%" alt="image" src="https://github.com/user-attachments/assets/e9482833-32df-490c-aa50-0bbf2abeb923" />
+    <img width="29%" alt="image" src="https://github.com/user-attachments/assets/6d26754b-5d68-4481-acb6-40d30d56fe82" />
   </p>
 * **Weather Forecast**: Shows weather forecast for today or next three days.
   <p align="center">
@@ -34,7 +32,7 @@ Discord bot that provides weather information directly through Discord commands.
     <img width="45%" alt="image" src="https://github.com/user-attachments/assets/474d49a8-d277-453b-bb0e-515d25434da3" />
   </p>
   
-## ✨ Available commands
+## Available commands
 ### Weather Commands
 
 | Command | Description |
