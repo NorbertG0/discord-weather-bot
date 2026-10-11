@@ -684,8 +684,8 @@ class Weather(commands.Cog):
         embed.add_field(
             name=(
                 f'O₃ - {weather["o3"]} µg/m³      '
-                f'SO₂ - {weather["so2"]} µg/m³      '
-                f'PM₁₀ - {weather["pm10"]} µg/m³'
+                f'     SO₂ - {weather["so2"]} µg/m³      '
+                f'   PM₁₀ - {weather["pm10"]} µg/m³'
             ),
             value='',
             inline=False
